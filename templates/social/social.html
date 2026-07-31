@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>📱 Social Media Mental Health Analysis</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <label class="form-label">
+                    Paste Social Media Post
+                </label>
+
+                <textarea
+                    class="form-control"
+                    rows="6"
+                    name="text"
+                    placeholder="Paste Instagram, Facebook, Twitter or WhatsApp text..."
+                    required></textarea>
+
+                <button
+                    class="btn btn-success mt-3">
+
+                    Analyze
+
+                </button>
+
+            </form>
+
+            {% if result %}
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card bg-success text-white">
+
+                        <div class="card-body text-center">
+
+                            <h5>😊 Sentiment</h5>
+
+                            <h3>{{ result.sentiment }}</h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card bg-info text-white">
+
+                        <div class="card-body text-center">
+
+                            <h5>😐 Emotion</h5>
+
+                            <h3>{{ result.emotion }}</h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card bg-danger text-white">
+
+                        <div class="card-body text-center">
+
+                            <h5>⚠️ Risk</h5>
+
+                            <h3>{{ result.risk }}</h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col-md-6 mb-3">
+
+                    <div class="card bg-warning">
+
+                        <div class="card-body text-center">
+
+                            <h5>🤖 AI Prediction</h5>
+
+                            <h3>{{ result.prediction }}</h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <div class="card bg-secondary text-white">
+
+                        <div class="card-body text-center">
+
+                            <h5>🎯 Confidence</h5>
+
+                            <h3>{{ result.confidence }}%</h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="card shadow">
+
+        <div class="card-header bg-dark text-white">
+
+            <h4>📜 Previous Analysis</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Date</th>
+
+                        <th>Sentiment</th>
+
+                        <th>Emotion</th>
+
+                        <th>Risk</th>
+
+                        <th>Prediction</th>
+
+                        <th>Confidence</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for item in history %}
+
+                    <tr>
+
+                        <td>{{ item.created_at.strftime("%d-%m-%Y") }}</td>
+
+                        <td>{{ item.sentiment }}</td>
+
+                        <td>{{ item.emotion }}</td>
+
+                        <td>{{ item.risk }}</td>
+
+                        <td>{{ item.prediction }}</td>
+
+                        <td>{{ item.confidence }}%</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

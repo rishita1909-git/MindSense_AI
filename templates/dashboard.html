@@ -1,0 +1,384 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <!-- Welcome Banner -->
+    <div class="card shadow border-0 mb-4"
+         style="background:linear-gradient(135deg,#2563eb,#4f46e5);color:white;border-radius:20px;">
+
+        <div class="card-body">
+
+            <h2>👋 Welcome {{ name }}</h2>
+
+            <p class="mb-0">
+                Your personal AI Mental Wellness Assistant
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h1>📝</h1>
+
+                    <h5>Total Journals</h5>
+
+                    <h2 class="text-primary">
+                        {{ total_entries }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h1>😊</h1>
+
+                    <h5>Most Common Mood</h5>
+
+                    <h4 class="text-success">
+                        {{ most_common_mood }}
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <h1>📅</h1>
+
+                    <h5>Latest Journal</h5>
+
+                    <h5 class="text-danger">
+                        {{ latest_entry }}
+                    </h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+
+    <div class="row mt-4">
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body">
+
+                    <h4>📊 Mood Analytics</h4>
+
+                    <canvas id="moodChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body">
+
+                    <h4>📈 Weekly Activity</h4>
+
+                    <canvas id="weeklyChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <h3 class="mt-2 mb-3">
+        🚀 Quick Access
+    </h3>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100 text-center">
+
+                <div class="card-body">
+
+                    <h1>📝</h1>
+
+                    <h4>Journal</h4>
+
+                    <a href="/journal" class="btn btn-primary">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100 text-center">
+
+                <div class="card-body">
+
+                    <h1>🤖</h1>
+
+                    <h4>AI Chatbot</h4>
+
+                    <a href="/chatbot" class="btn btn-success">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100 text-center">
+
+                <div class="card-body">
+
+                    <h1>📱</h1>
+
+                    <h4>Social Analysis</h4>
+
+                    <a href="/social" class="btn btn-info">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100 text-center">
+
+                <div class="card-body">
+
+                    <h1>😊</h1>
+
+                    <h4>Face Detection</h4>
+
+                    <span class="badge bg-warning text-dark">
+                        Coming Soon
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100 text-center">
+
+                <div class="card-body">
+
+                    <h1>🎤</h1>
+
+                    <h4>Voice Analysis</h4>
+
+                    <span class="badge bg-warning text-dark">
+                        Coming Soon
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100 text-center">
+
+                <div class="card-body">
+
+                    <h1>⚙️</h1>
+
+                    <h4>Settings</h4>
+
+                    <a href="/settings" class="btn btn-secondary">
+                        Open
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+<div class="col-md-4 mb-4">
+
+    <div class="card shadow h-100 text-center">
+
+        <div class="card-body">
+
+            <h1>📄</h1>
+
+            <h4>Report</h4>
+
+            <a href="/download_report"
+               class="btn btn-dark">
+
+                Download PDF
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- AI Quote -->
+
+    <div class="card shadow border-0 mt-4">
+
+        <div class="card-body text-center">
+
+            <h4>💙 AI Wellness Tip</h4>
+
+            <p class="lead">
+
+                "Your feelings are valid. Small positive habits every day can make a big difference."
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+.card{
+
+transition:.3s;
+
+border-radius:18px;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 12px 30px rgba(0,0,0,.18);
+
+}
+
+</style>
+
+<script>
+
+// Mood Pie
+
+const moodData={{ mood_count|tojson }};
+
+new Chart(document.getElementById("moodChart"),{
+
+type:"doughnut",
+
+data:{
+
+labels:Object.keys(moodData),
+
+datasets:[{
+
+data:Object.values(moodData)
+
+}]
+
+}
+
+});
+
+// Weekly
+
+new Chart(document.getElementById("weeklyChart"),{
+
+type:"line",
+
+data:{
+
+labels:{{ chart_labels|tojson }},
+
+datasets:[{
+
+label:"Journal Entries",
+
+data:{{ chart_values|tojson }},
+
+borderWidth:3,
+
+fill:false,
+
+tension:.4
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+scales:{
+
+y:{beginAtZero:true}
+
+}
+
+}
+
+});
+
+</script>
+
+{% endblock %}

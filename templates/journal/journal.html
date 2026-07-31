@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Daily Journal</h2>
+
+    <!-- Flash Message -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} mt-3">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- AI Prediction -->
+    {% if prediction %}
+    <div class="alert alert-info mt-3">
+
+        <h4>🤖 AI Depression Prediction</h4>
+
+        <h5>{{ prediction }}</h5>
+
+        <h6>Confidence : {{ confidence }}%</h6>
+
+    </div>
+    {% endif %}
+
+    <!-- Journal Form -->
+    <form method="POST">
+
+        <div class="mb-3">
+
+            <label class="form-label">Select Mood</label>
+
+            <select class="form-control" name="mood" required>
+
+                <option value="Happy 😊">Happy 😊</option>
+                <option value="Sad 😔">Sad 😔</option>
+                <option value="Angry 😡">Angry 😡</option>
+                <option value="Stressed 😣">Stressed 😣</option>
+                <option value="Excited 😄">Excited 😄</option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">Write Your Thoughts</label>
+
+            <textarea
+                class="form-control"
+                rows="6"
+                name="journal"
+                placeholder="Write your thoughts here..."
+                required></textarea>
+
+        </div>
+
+        <button class="btn btn-primary">
+            Save Journal
+        </button>
+
+    </form>
+
+    <hr class="my-5">
+
+    <h3>My Journal History</h3>
+
+    {% if journals %}
+
+        {% for entry in journals %}
+
+        <div class="card mt-3 shadow-sm">
+
+            <div class="card-body">
+
+                <h5>{{ entry.mood }}</h5>
+
+                <p>{{ entry.journal }}</p>
+
+                <p>
+
+                    <strong>Sentiment :</strong>
+
+                    {% if entry.sentiment == "Positive" %}
+
+                        <span class="badge bg-success">
+                            😊 {{ entry.sentiment }}
+                        </span>
+
+                    {% elif entry.sentiment == "Negative" %}
+
+                        <span class="badge bg-danger">
+                            😔 {{ entry.sentiment }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-warning text-dark">
+                            😐 {{ entry.sentiment }}
+                        </span>
+
+                    {% endif %}
+
+                </p>
+
+                <small class="text-muted">
+
+                    {{ entry.created_at.strftime("%d %b %Y %I:%M %p") }}
+
+                </small>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="alert alert-info mt-3">
+
+            No Journal Entries Found.
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
