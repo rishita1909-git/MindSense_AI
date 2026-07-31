@@ -143,6 +143,14 @@ Computer Science Student
 GitHub:
 https://github.com/rishita1909-git
 
+**Kavya Rajpoot**
+
+Computer Science Student
+
+**Kashish Gautam**
+
+Computer Science Student
+
 ---
 
 ## 📜 License
